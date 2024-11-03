@@ -45,6 +45,15 @@ const Dashboard = () => {
     }
   };
 
+  // Sample data for the chart
+  const salesData = [
+    { date: '2024-10-01', sales: 3000 },
+    { date: '2024-10-02', sales: 2400 },
+    { date: '2024-10-03', sales: 3200 },
+    { date: '2024-10-04', sales: 2800 },
+    { date: '2024-10-05', sales: 4000 },
+  ];
+
   return (
     <div className="p-6 bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-300 min-h-screen">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Dashboard Overview</h2>
@@ -57,7 +66,12 @@ const Dashboard = () => {
 
       <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
         <h3 className="text-lg font-semibold mb-4 text-gray-700">Sales Overview</h3>
-        <Chart />
+        <Chart 
+          title="Sales Overview" 
+          data={salesData} 
+          xKey="date" 
+          yKey="sales" 
+        />
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-lg">
