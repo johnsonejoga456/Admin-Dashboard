@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Notification from './components/Notification';
+import Campaigns from './pages/Campaigns';
+import Settings from './pages/Settings';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -55,6 +57,8 @@ const App = () => {
             <Route path="/orders" element={<AuthenticatedLayout><ProtectedRoute><Orders /></ProtectedRoute></AuthenticatedLayout>} />
             <Route path="/content" element={<AuthenticatedLayout><ProtectedRoute><Content /></ProtectedRoute></AuthenticatedLayout>} />
             <Route path="/products" element={<AuthenticatedLayout><ProtectedRoute><Products /></ProtectedRoute></AuthenticatedLayout>} />
+            <Route path="/campaigns" element={<AuthenticatedLayout><ProtectedRoute><Campaigns /></ProtectedRoute></AuthenticatedLayout>} />
+            <Route path="/settings" element={<AuthenticatedLayout><ProtectedRoute><Settings /></ProtectedRoute></AuthenticatedLayout>} />
             <Route path="*" element={<div>Page Not Found</div>} /> {/* Fallback route */}
           </Routes>
         </Router>

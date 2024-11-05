@@ -1,81 +1,117 @@
-import React from "react";
-import FormInput from '../components/FormInput';
+import React, { useState, useEffect } from 'react';
+import { Button, TextField, MenuItem, FormControl, InputLabel, Select } from '@mui/material';
 
 const Settings = () => {
-    const [profile, setProfile] = useState({
-        name: 'Admin User',
-        email: 'admin@example.com',
-        password: '',
-    });
+  const [profile, setProfile] = useState({ name: '', email: '', password: '' });
+  const [preferences, setPreferences] = useState({ theme: '', language: '', notifications: '' });
 
-    const [preferences, setPreferences] = useState({
-        notifications: true,
-        darkMode: false,
-    });
+  const handleProfileChange = (e) => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+  };
 
-    // Hnadle form changes
-    const handleProfileChange = (e) => {
-        const { name, value } = e.target;
-        setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
-    };
+  const handlePreferencesChange = (e) => {
+    const { name, value } = e.target;
+    setPreferences({ ...preferences, [name]: value });
+  };
 
-    const handlePreferenceChange = (e) => {
-        const { name, checked } = e.target;
-        setPreferences((prevPrefs) => ({ ...prevProfile, [name]: checked }));
-    };
+  const handleSaveProfile = () => {
+    localStorage.setItem('profile', JSON.stringify(profile));
+    alert('Profile saved successfully!');
+  };
 
-    return (
-        <div className="p-6">
-            <h2 className="text-2xl font-bold mb-6">Settings</h2>
+  const handleSavePreferences = () => {
+    localStorage.setItem('preferences', JSON.stringify(preferences));
+    alert('Preferences saved successfully!');
+  };
 
-            {/* Profile Settings */}
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-                <h3 className="text-lg font-semibold mb-4">Profile Settings</h3>
-                <FormInput
-                    label="Name"
-                    name="name"
-                    value={profile.name}
-                    onChange={handleProfileChange}
-                />
-                <FormInput
-                    label="Email"
-                    name="email"
-                    value={profile.email}
-                    onChange={handleProfileChange}
-                />
-                <FormInput
-                    label="Password"
-                    name="password"
-                    type="password"
-                    value={profile.password}
-                    onChange={handleProfileChange}
-                />
-            </div>
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('profile');
+    const savedPreferences = localStorage.getItem('preferences');
+    if (savedProfile) setProfile(JSON.parse(savedProfile));
+    if (savedPreferences) setPreferences(JSON.parse(savedPreferences));
+  }, []);
 
-            {/* Preferences Section */}
-            <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-                <h3 className="text-lg font-semibold mb-4">Preferences</h3>
-                <div className="flex items-center mb-4">
-                    <label className="mr-2">Enable notifications</label>
-                    <input
-                        type="checkbox"
-                        name="notifications"
-                        checked={preferences.notifications}
-                        onChange={handlePreferenceChange}
-                    />
-                </div>
-                <div className="flex items-center">
-                    <label className="mr-2">Dark Mode</label>
-                    <input
-                        type="checkbox"
-                        name="darkMode"
-                        checked={preferences.darkMode}
-                        onChange={handlePreferenceChange}
-                    />
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div className="p-6 bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 min-h-screen rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">Settings</h2>
+
+      {/* Profile Settings */}
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">Profile Settings</h3>
+        <TextField
+          label="Name"
+          name="name"
+          value={profile.name}
+          onChange={handleProfileChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Email"
+          name="email"
+          value={profile.email}
+          onChange={handleProfileChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          value={profile.password}
+          onChange={handleProfileChange}
+          fullWidth
+          margin="normal"
+        />
+        <Button variant="contained" color="primary" onClick={handleSaveProfile}>
+          Save Profile
+        </Button>
+      </div>
+
+      {/* User Preferences */}
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-2">User Preferences</h3>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Theme</InputLabel>
+          <Select
+            name="theme"
+            value={preferences.theme}
+            onChange={handlePreferencesChange}
+          >
+            <MenuItem value="light">Light</MenuItem>
+            <MenuItem value="dark">Dark</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Language</InputLabel>
+          <Select
+            name="language"
+            value={preferences.language}
+            onChange={handlePreferencesChange}
+          >
+            <MenuItem value="english">English</MenuItem>
+            <MenuItem value="spanish">Spanish</MenuItem>
+            <MenuItem value="french">French</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Notifications</InputLabel>
+          <Select
+            name="notifications"
+            value={preferences.notifications}
+            onChange={handlePreferencesChange}
+          >
+            <MenuItem value="enabled">Enabled</MenuItem>
+            <MenuItem value="disabled">Disabled</MenuItem>
+          </Select>
+        </FormControl>
+        <Button variant="contained" color="primary" onClick={handleSavePreferences}>
+          Save Preferences
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default Settings;
