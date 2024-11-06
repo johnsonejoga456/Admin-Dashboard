@@ -5,6 +5,17 @@ const Settings = () => {
   const [profile, setProfile] = useState({ name: '', email: '', password: '' });
   const [preferences, setPreferences] = useState({ theme: '', language: '', notifications: '' });
 
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedPreferences = localStorage.getItem('userPreferences');
+    if (savedPreferences) {
+      setPreferences(JSON.parse(savedPreferences));
+      console.log('Loaded preferences:', JSON.parse(savedPreferences)); // Debug log
+    } else {
+      console.log('No saved preferences found in localStorage');
+    }
+  }, []);
+
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
@@ -12,25 +23,18 @@ const Settings = () => {
 
   const handlePreferencesChange = (e) => {
     const { name, value } = e.target;
-    setPreferences({ ...preferences, [name]: value });
+    setPreferences((prevPreferences) => {
+      const newPreferences = { ...prevPreferences, [name]: value };
+      console.log('Saving preferences:', newPreferences); // Debug log
+      localStorage.setItem('userPreferences', JSON.stringify(newPreferences)); // Save to localStorage
+      return newPreferences;
+    });
   };
 
   const handleSaveProfile = () => {
-    localStorage.setItem('profile', JSON.stringify(profile));
+    // Save profile logic
     alert('Profile saved successfully!');
   };
-
-  const handleSavePreferences = () => {
-    localStorage.setItem('preferences', JSON.stringify(preferences));
-    alert('Preferences saved successfully!');
-  };
-
-  useEffect(() => {
-    const savedProfile = localStorage.getItem('profile');
-    const savedPreferences = localStorage.getItem('preferences');
-    if (savedProfile) setProfile(JSON.parse(savedProfile));
-    if (savedPreferences) setPreferences(JSON.parse(savedPreferences));
-  }, []);
 
   return (
     <div className="p-6 bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 min-h-screen rounded-xl shadow-lg">
@@ -106,7 +110,7 @@ const Settings = () => {
             <MenuItem value="disabled">Disabled</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={handleSavePreferences}>
+        <Button variant="contained" color="primary" onClick={() => alert('Preferences saved successfully!')}>
           Save Preferences
         </Button>
       </div>

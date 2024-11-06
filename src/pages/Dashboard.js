@@ -55,17 +55,17 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="p-6 bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-300 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Dashboard Overview</h2>
+    <div className="p-4 md:p-6 bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-300 min-h-screen">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-800">Dashboard Overview</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-6">
         {kpiMetrics.map((metric, index) => (
           <Card key={index} title={metric.title} value={metric.value} icon={metric.icon} color={metric.color} />
         ))}
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">Sales Overview</h3>
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg mb-4 md:mb-6">
+        <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-700">Sales Overview</h3>
         <Chart 
           title="Sales Overview" 
           data={salesData} 
@@ -74,8 +74,8 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4 text-gray-700">Recent Activities</h3>
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg">
+        <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-700">Recent Activities</h3>
         <DataTable columns={activityColumns} data={recentActivities} />
       </div>
     </div>

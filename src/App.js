@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'; // Add useContext import
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+// src/App.js
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Notification from './components/Notification';
 import Dashboard from './pages/Dashboard';
 import Analytics from './pages/Analytics';
 import Users from './pages/Users';
@@ -13,58 +15,49 @@ import Content from './pages/Content';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
-import Notification from './components/Notification';
 import Campaigns from './pages/Campaigns';
 import Settings from './pages/Settings';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ element }) => {
   const { isAuthenticated } = useContext(AuthContext);
-  return isAuthenticated ? children : <Navigate to="/register" />;
+  return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
-const AuthenticatedLayout = ({ children }) => {
-  const { isAuthenticated } = useContext(AuthContext);
-
-  return isAuthenticated ? (
-    <div className="flex">
-      <Sidebar />
-      <div className={`w-full ${isAuthenticated ? 'ml-64' : ''}`}>
-        <Header />
-        <main className="p-4 bg-gray-100 min-h-screen">
-          {children}
-        </main>
-        <Footer />
-      </div>
+const Layout = ({ children }) => (
+  <div className="flex">
+    <Sidebar />
+    <div className="w-full ml-64">
+      <Header />
+      <main className="p-4 bg-gray-100 min-h-screen">{children}</main>
+      <Footer />
     </div>
-  ) : (
-    <Navigate to="/register" />
-  );
-};
+  </div>
+);
 
-const App = () => {
-  return (
-    <AuthProvider>
-      <NotificationProvider>
-        <Router>
-          <Notification />
-          <Routes>
-            <Route path="/" element={<Navigate to="/register" />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<AuthenticatedLayout><ProtectedRoute><Dashboard /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/analytics" element={<AuthenticatedLayout><ProtectedRoute><Analytics /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/users" element={<AuthenticatedLayout><ProtectedRoute><Users /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/orders" element={<AuthenticatedLayout><ProtectedRoute><Orders /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/content" element={<AuthenticatedLayout><ProtectedRoute><Content /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/products" element={<AuthenticatedLayout><ProtectedRoute><Products /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/campaigns" element={<AuthenticatedLayout><ProtectedRoute><Campaigns /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="/settings" element={<AuthenticatedLayout><ProtectedRoute><Settings /></ProtectedRoute></AuthenticatedLayout>} />
-            <Route path="*" element={<div>Page Not Found</div>} /> {/* Fallback route */}
-          </Routes>
-        </Router>
-      </NotificationProvider>
-    </AuthProvider>
-  );
-};
+const App = () => (
+  <AuthProvider>
+    <NotificationProvider>
+      <Router>
+        <Notification />
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={<Layout><Dashboard /></Layout>} />} />
+          <Route path="/analytics" element={<ProtectedRoute element={<Layout><Analytics /></Layout>} />} />
+          <Route path="/users" element={<ProtectedRoute element={<Layout><Users /></Layout>} />} />
+          <Route path="/orders" element={<ProtectedRoute element={<Layout><Orders /></Layout>} />} />
+          <Route path="/content" element={<ProtectedRoute element={<Layout><Content /></Layout>} />} />
+          <Route path="/products" element={<ProtectedRoute element={<Layout><Products /></Layout>} />} />
+          <Route path="/campaigns" element={<ProtectedRoute element={<Layout><Campaigns /></Layout>} />} />
+          <Route path="/settings" element={<ProtectedRoute element={<Layout><Settings /></Layout>} />} />
+
+          {/* Fallback for undefined routes */}
+          <Route path="*" element={<div>Page Not Found</div>} />
+        </Routes>
+      </Router>
+    </NotificationProvider>
+  </AuthProvider>
+);
 
 export default App;

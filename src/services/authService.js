@@ -1,5 +1,5 @@
 // Register a new user
-export const  register = async (userData) => {
+export const register = async (userData) => {
     try {
         const users = JSON.parse(localStorage.getItem('users')) || [];
         users.push(userData);
@@ -14,27 +14,27 @@ export const  register = async (userData) => {
 // Login user
 export const login = async (credentials) => {
     try {
-        // Simulate backend by checking local storage
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const user = users.find(user => user.email === credentials.email && user.password === credentials.password);
         if (user) {
-            const token = "mock-token" // Simulate token
-            localStorage.setItem('token', token);
-            return { token }
+            const token = "mock-token"; // Simulate token
+            localStorage.setItem('authToken', token);
+            return { token };
         } else {
             throw new Error("Invalid credentials");
         }
     } catch (error) {
         console.error("Login error", error);
+        throw error;
     }
 };
 
 // Logout user
 export const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
 };
 
 // Get current user token
 export const getToken = () => {
-    return localStorage.getItem('token');
-}
+    return localStorage.getItem('authToken');
+};

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from '../context/AuthContext';
-import { login } from '../services/authService';
-import { useNavigate } from "react-router-dom";
+import { login as loginService } from '../services/authService';
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [error, setError] = useState(null);
-    const { setIsAuthenticated } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -16,11 +16,10 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await login(credentials);
+            const data = await loginService(credentials);
             if (data?.token) {
-                localStorage.setItem('token', data.token);
-                setIsAuthenticated(true);
-                navigate('/dashboard');
+                login(data.token); // Set token in AuthContext
+                navigate('/dashboard', { replace: true }); // Redirect to dashboard
             } else {
                 throw new Error('Invalid login response');
             }
@@ -35,13 +34,13 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="bg-white p-8 shadow-md rounded w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
                 
-                {/* Display error message if login fails */}
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
                 
                 <input
                     type="email"
                     name="email"
                     placeholder="Email"
+                    value={credentials.email}
                     onChange={handleChange}
                     className="w-full p-2 mb-4 border rounded"
                     title="Enter your email"
@@ -52,6 +51,7 @@ const Login = () => {
                     type="password"
                     name="password"
                     placeholder="Enter Password"
+                    value={credentials.password}
                     onChange={handleChange}
                     className="w-full p-2 mb-4 border rounded"
                     title="Enter your password"
@@ -65,6 +65,10 @@ const Login = () => {
                 >
                     Login
                 </button>
+
+                <p className="mt-4 text-center">
+                    Don't have an account? <Link to="/register" className="text-blue-600 hover:underline">Register</Link>
+                </p>
             </form>
         </div>
     );

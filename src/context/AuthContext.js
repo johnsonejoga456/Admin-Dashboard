@@ -1,23 +1,24 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { getToken, logout } from '../services/authService';
+import React, { createContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem('authToken')
+  );
 
-  useEffect(() => {
-    const token = getToken();
-    setIsAuthenticated(!!token);
-  }, []);
+  const login = (token) => {
+    localStorage.setItem('authToken', token);
+    setIsAuthenticated(true);
+  };
 
-  const handleLogout = () => {
-    logout();
+  const logout = () => {
+    localStorage.removeItem('authToken');
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, handleLogout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

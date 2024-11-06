@@ -5,7 +5,7 @@ import { useNotification } from '../context/NotificationContext';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const [currentOrder, setCurrentOrder] = useState({ name: '', product: '', trackingId: '', date: '', status: '' });
+  const [currentOrder, setCurrentOrder] = useState({ name: '', product: '', date: '', status: '' });
   const [isEditing, setIsEditing] = useState(false);
   const { addNotification } = useNotification();
 
@@ -17,6 +17,10 @@ const Orders = () => {
     getOrders();
   }, []);
 
+  const generateTrackingID = () => {
+    return Math.floor(10000000 + Math.random() * 90000000).toString(); // Generate an 8-digit tracking ID
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentOrder({ ...currentOrder, [name]: value });
@@ -25,12 +29,13 @@ const Orders = () => {
   const handleSaveOrder = async () => {
     if (isEditing) {
       await updateOrder(currentOrder.id, currentOrder);
-      addNotification('Order updated successfully', 'success'); // Trigger notification for update
+      addNotification('Order updated successfully', 'success');
     } else {
-      await createOrder(currentOrder);
-      addNotification('Order created successfully', 'success'); // Trigger notification for creation
+      const newOrder = { ...currentOrder, trackingId: generateTrackingID() };
+      await createOrder(newOrder);
+      addNotification('Order created successfully', 'success');
     }
-    setCurrentOrder({ name: '', product: '', trackingId: '', date: '', status: '' });
+    setCurrentOrder({ name: '', product: '', date: '', status: '' });
     setIsEditing(false);
     const updatedOrders = await fetchOrders();
     setOrders(updatedOrders);
@@ -43,7 +48,7 @@ const Orders = () => {
 
   const handleDeleteOrder = async (orderId) => {
     await deleteOrder(orderId);
-    addNotification('Order deleted successfully', 'success'); // Trigger notification for deletion
+    addNotification('Order deleted successfully', 'success');
     const updatedOrders = await fetchOrders();
     setOrders(updatedOrders);
   };
@@ -105,14 +110,6 @@ const Orders = () => {
           name="product"
           placeholder="Product"
           value={currentOrder.product}
-          onChange={handleInputChange}
-          className="p-2 border border-gray-300 rounded-md mb-2 w-full"
-        />
-        <input
-          type="text"
-          name="trackingId"
-          placeholder="Tracking ID"
-          value={currentOrder.trackingId}
           onChange={handleInputChange}
           className="p-2 border border-gray-300 rounded-md mb-2 w-full"
         />
