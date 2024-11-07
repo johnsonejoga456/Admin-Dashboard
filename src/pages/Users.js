@@ -25,15 +25,17 @@ const Users = () => {
     { id: 1, name: 'John Doe', email: 'johndoe@example.com', role: 'Admin' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
     { id: 3, name: 'Alice Johnson', email: 'alice@example.com', role: 'Editor' },
-    { id: 4, name: 'Bob Brown', email: 'bob@example.com', role: 'Viewer' }
+    { id: 4, name: 'Bob Brown', email: 'bob@example.com', role: 'Viewer' },
   ];
 
   const [usersData, setUsersData] = useState(initialUsers);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isViewing, setIsViewing] = useState(false);
+  const [newUser, setNewUser] = useState({ name: '', email: '', role: '' });
 
   // Filter and search logic
   const filteredData = usersData.filter((user) => {
@@ -49,14 +51,14 @@ const Users = () => {
   };
 
   const handleSaveEdit = () => {
-    setUsersData(usersData.map(user => user.id === currentUser.id ? currentUser : user));
+    setUsersData(usersData.map((user) => (user.id === currentUser.id ? currentUser : user)));
     setIsEditing(false);
     setCurrentUser(null);
   };
 
   const handleDelete = (userId) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
-      setUsersData(usersData.filter(user => user.id !== userId));
+      setUsersData(usersData.filter((user) => user.id !== userId));
     }
   };
 
@@ -65,8 +67,14 @@ const Users = () => {
     setCurrentUser(user);
   };
 
-  const handleAddUser = (newUser) => {
+  const handleAddUser = () => {
+    setIsAdding(true);
+  };
+
+  const handleSaveNewUser = () => {
     setUsersData([...usersData, { ...newUser, id: usersData.length + 1 }]);
+    setIsAdding(false);
+    setNewUser({ name: '', email: '', role: '' });
   };
 
   return (
@@ -99,7 +107,7 @@ const Users = () => {
 
       {/* Add User Button */}
       <button
-        onClick={() => handleAddUser({ name: 'New User', email: 'newuser@example.com', role: 'User' })}
+        onClick={handleAddUser}
         className="mb-6 p-2 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition"
       >
         Add User
@@ -109,6 +117,52 @@ const Users = () => {
       <div className="bg-white rounded-lg shadow-md p-4">
         <DataTable columns={columns} data={filteredData} />
       </div>
+
+      {/* Add User Modal */}
+      {isAdding && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Add New User</h3>
+            <input
+              type="text"
+              value={newUser.name}
+              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+              className="p-2 border border-gray-300 rounded-md mb-4 w-full shadow-sm"
+              placeholder="Name"
+            />
+            <input
+              type="email"
+              value={newUser.email}
+              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+              className="p-2 border border-gray-300 rounded-md mb-4 w-full shadow-sm"
+              placeholder="Email"
+            />
+            <select
+              value={newUser.role}
+              onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+              className="p-2 border border-gray-300 rounded-md w-full mb-4 shadow-sm"
+            >
+              <option value="">Select Role</option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+              <option value="Editor">Editor</option>
+              <option value="Viewer">Viewer</option>
+            </select>
+            <button
+              onClick={handleSaveNewUser}
+              className="p-2 bg-green-500 text-white rounded-md mr-2 hover:bg-green-600 transition"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => setIsAdding(false)}
+              className="p-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Edit User Modal */}
       {isEditing && (

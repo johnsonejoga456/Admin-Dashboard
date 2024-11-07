@@ -13,14 +13,21 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="relative h-screen">
+      {/* Mobile Header with Toggle Button */}
       <div className="md:hidden bg-orange-400 p-4 flex justify-between items-center">
         <h2 className="text-2xl font-bold text-white">Admin Dashboard</h2>
         <button onClick={toggleSidebar}>
           {isOpen ? <XIcon className="h-6 w-6 text-white" /> : <MenuIcon className="h-6 w-6 text-white" />}
         </button>
       </div>
-      <div className={`${isOpen ? 'block' : 'hidden'} md:block md:w-64 h-full bg-orange-400 text-white fixed top-0 left-0 shadow-lg`}>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-orange-400 text-white shadow-lg transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
+      >
         <h2 className="hidden md:block text-2xl font-bold p-6 border-b border-orange-300">Admin Dashboard</h2>
         <nav className="mt-10">
           <ul>
@@ -63,6 +70,14 @@ const Sidebar = () => {
           </ul>
         </nav>
       </div>
+
+      {/* Overlay for mobile when sidebar is open */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 md:hidden z-40"
+          onClick={toggleSidebar}
+        ></div>
+      )}
     </div>
   );
 };

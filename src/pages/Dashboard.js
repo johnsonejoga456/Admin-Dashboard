@@ -1,3 +1,5 @@
+// src/pages/Dashboard.js
+
 import React from 'react';
 import { ChartBarIcon, ShoppingBagIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/solid';
 import Card from '../components/Card';
@@ -34,18 +36,14 @@ const Dashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Delivered':
-        return 'bg-green-500';
-      case 'Pending':
-        return 'bg-yellow-500';
-      case 'Cancelled':
-        return 'bg-red-500';
-      default:
-        return 'bg-gray-400';
+      case 'Delivered': return 'bg-green-500';
+      case 'Pending': return 'bg-yellow-500';
+      case 'Cancelled': return 'bg-red-500';
+      default: return 'bg-gray-400';
     }
   };
 
-  // Sample data for the chart
+  // Define salesData
   const salesData = [
     { date: '2024-10-01', sales: 3000 },
     { date: '2024-10-02', sales: 2400 },
@@ -66,12 +64,7 @@ const Dashboard = () => {
 
       <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg mb-4 md:mb-6">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-700">Sales Overview</h3>
-        <Chart 
-          title="Sales Overview" 
-          data={salesData} 
-          xKey="date" 
-          yKey="sales" 
-        />
+        <Chart title="Sales Overview" data={salesData} xKey="date" yKey="sales" />
       </div>
 
       <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg">
