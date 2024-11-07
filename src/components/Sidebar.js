@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="relative h-screen">
+    <div className="relative">
       {/* Mobile Header with Toggle Button */}
       <div className="md:hidden bg-orange-400 p-4 flex justify-between items-center">
         <h2 className="text-2xl font-bold text-white">Admin Dashboard</h2>
@@ -22,13 +22,14 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-orange-400 text-white shadow-lg transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
       >
-        <h2 className="hidden md:block text-2xl font-bold p-6 border-b border-orange-300">Admin Dashboard</h2>
+        <h2 className="hidden md:block text-2xl font-bold p-6 border-b border-orange-300">
+          Admin Dashboard
+        </h2>
         <nav className="mt-10">
           <ul>
             <li className="flex items-center p-4 hover:bg-orange-200 transition duration-200">
