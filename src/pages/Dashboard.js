@@ -1,5 +1,3 @@
-// src/pages/Dashboard.js
-
 import React from 'react';
 import { ChartBarIcon, ShoppingBagIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/solid';
 import Card from '../components/Card';
@@ -43,7 +41,6 @@ const Dashboard = () => {
     }
   };
 
-  // Define salesData
   const salesData = [
     { date: '2024-10-01', sales: 3000 },
     { date: '2024-10-02', sales: 2400 },

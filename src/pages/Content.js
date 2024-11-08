@@ -9,11 +9,11 @@ const Content = () => {
   const [filterStatus, setFilterStatus] = useState('');
 
   useEffect(() => {
-    // Load initial mock data (could be replaced with a fetch from local storage or a static file)
+    // Load initial mock data
     const initialContent = [
       { id: 1, title: 'First Article', body: 'This is the first article', author: 'Author1', type: 'Article', status: 'Published', dateCreated: '2024-01-01', lastUpdated: '2024-01-10' },
       { id: 2, title: 'Second Blog Post', body: 'This is the second blog post', author: 'Author2', type: 'Blog Post', status: 'Draft', dateCreated: '2024-01-05', lastUpdated: '2024-01-15' },
-      // Add more mock data as needed
+      
     ];
     setContentItems(initialContent);
   }, []);

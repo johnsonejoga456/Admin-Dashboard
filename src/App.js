@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext';
@@ -18,6 +17,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import Campaigns from './pages/Campaigns';
 import Settings from './pages/Settings';
+import Tasks from './pages/Tasks';
 
 // ProtectedRoute component to restrict access based on authentication status
 const ProtectedRoute = ({ element }) => {
@@ -60,6 +60,7 @@ const App = () => (
             <Route path="/products" element={<ProtectedRoute element={<Layout><Products /></Layout>} />} />
             <Route path="/campaigns" element={<ProtectedRoute element={<Layout><Campaigns /></Layout>} />} />
             <Route path="/settings" element={<ProtectedRoute element={<Layout><Settings /></Layout>} />} />
+            <Route path="/tasks" element={<ProtectedRoute element={<Layout><Tasks /></Layout>} />} />
             <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
         </Router>

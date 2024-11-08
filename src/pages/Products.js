@@ -3,7 +3,7 @@ import DataTable from '../components/DataTable';
 import { Button } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import FormInput from '../components/FormInput';
-import { useNotification } from '../context/NotificationContext'; // Import useNotification hook
+import { useNotification } from '../context/NotificationContext';
 
 const Products = () => {
   const [products, setProducts] = useState([
