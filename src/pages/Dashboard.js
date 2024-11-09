@@ -41,6 +41,7 @@ const Dashboard = () => {
     }
   };
 
+  // Define salesData
   const salesData = [
     { date: '2024-10-01', sales: 3000 },
     { date: '2024-10-02', sales: 2400 },
