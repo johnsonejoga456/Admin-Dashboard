@@ -25,53 +25,53 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed md:relative top-0 left-0 h-full w-64 lg:w-72 bg-orange-400 text-white shadow-lg transform ${
+        className={`fixed top-0 lg:ml-45 lg:w-45 left-0 h-full w-56 bg-orange-400 text-white shadow-lg transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50 md:z-auto`}
+        } md:translate-x-0 transition-transform duration-300 ease-in-out z-50`}
       >
-        <h2 className="hidden md:block text-2xl lg:text-3xl font-bold p-6 border-b border-orange-300">
+        <h2 className="hidden md:block text-2xl font-bold p-6 border-b border-orange-300">
           Admin Dashboard
         </h2>
         <nav className="mt-10">
-          <ul className="space-y-2 lg:space-y-4">
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <HomeIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+          <ul>
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <HomeIcon className="h-5 w-5 mr-3" />
               <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Dashboard</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ChartPieIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ChartPieIcon className="h-5 w-5 mr-3" />
               <Link to="/analytics" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Analytics</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <UsersIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <UsersIcon className="h-5 w-5 mr-3" />
               <Link to="/users" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Users</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <DocumentTextIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <DocumentTextIcon className="h-5 w-5 mr-3" />
               <Link to="/content" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Content</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ShoppingBagIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ShoppingBagIcon className="h-5 w-5 mr-3" />
               <Link to="/products" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Products</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ClipboardListIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ClipboardListIcon className="h-5 w-5 mr-3" />
               <Link to="/orders" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Orders</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ClipboardCheckIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ClipboardCheckIcon className="h-5 w-5 mr-3" />
               <Link to="/tasks" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Tasks</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <BellIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <BellIcon className="h-5 w-5 mr-3" />
               <Link to="/campaigns" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Campaigns</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <CogIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
+              <CogIcon className="h-5 w-5 mr-3" />
               <Link to="/settings" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Settings</Link>
             </li>
-            <li className="flex items-center p-3 lg:p-4 hover:bg-orange-500 transition duration-200 rounded-md">
-              <LogoutIcon className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
+            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md mt-auto">
+              <LogoutIcon className="h-5 w-5 mr-3" />
               <Link to="/login" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Logout</Link>
             </li>
           </ul>
