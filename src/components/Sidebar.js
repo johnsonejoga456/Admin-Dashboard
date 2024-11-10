@@ -32,46 +32,46 @@ const Sidebar = () => {
         <h2 className="hidden md:block text-2xl font-bold p-6 border-b border-orange-300">
           Admin Dashboard
         </h2>
-        <nav className="mt-10">
-          <ul>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <HomeIcon className="h-5 w-5 mr-3" />
+        <nav className="mt-6">
+          <ul className="space-y-1">
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <HomeIcon className="h-5 w-5 mr-2" />
               <Link to="/dashboard" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Dashboard</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ChartPieIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ChartPieIcon className="h-5 w-5 mr-2" />
               <Link to="/analytics" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Analytics</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <UsersIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <UsersIcon className="h-5 w-5 mr-2" />
               <Link to="/users" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Users</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <DocumentTextIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <DocumentTextIcon className="h-5 w-5 mr-2" />
               <Link to="/content" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Content</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ShoppingBagIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ShoppingBagIcon className="h-5 w-5 mr-2" />
               <Link to="/products" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Products</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ClipboardListIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ClipboardListIcon className="h-5 w-5 mr-2" />
               <Link to="/orders" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Orders</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <ClipboardCheckIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <ClipboardCheckIcon className="h-5 w-5 mr-2" />
               <Link to="/tasks" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Tasks</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <BellIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <BellIcon className="h-5 w-5 mr-2" />
               <Link to="/campaigns" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Campaigns</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md">
-              <CogIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md">
+              <CogIcon className="h-5 w-5 mr-2" />
               <Link to="/settings" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Settings</Link>
             </li>
-            <li className="flex items-center p-3 hover:bg-orange-500 transition duration-200 rounded-md mt-auto">
-              <LogoutIcon className="h-5 w-5 mr-3" />
+            <li className="flex items-center px-3 py-2 hover:bg-orange-500 transition duration-200 rounded-md mt-auto">
+              <LogoutIcon className="h-5 w-5 mr-2" />
               <Link to="/login" onClick={() => setIsOpen(false)} className="text-sm lg:text-base">Logout</Link>
             </li>
           </ul>
