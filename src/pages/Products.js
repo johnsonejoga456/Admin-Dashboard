@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DataTable from '../components/DataTable';
-import { Button } from '@mui/material';
+import { Button, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import FormInput from '../components/FormInput';
 import { useNotification } from '../context/NotificationContext';
@@ -82,7 +82,18 @@ const Products = () => {
           <FormInput name="name" label="Product Name" value={productForm.name} onChange={handleFormChange} />
           <FormInput name="category" label="Category" value={productForm.category} onChange={handleFormChange} />
           <FormInput name="price" label="Price" value={productForm.price} onChange={handleFormChange} />
-          <FormInput name="status" label="Status" value={productForm.status} onChange={handleFormChange} />
+          
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Status</InputLabel>
+            <Select
+              name="status"
+              value={productForm.status}
+              onChange={handleFormChange}
+            >
+              <MenuItem value="In Stock">In Stock</MenuItem>
+              <MenuItem value="Out of Stock">Out of Stock</MenuItem>
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="secondary">Cancel</Button>
